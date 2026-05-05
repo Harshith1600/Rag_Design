@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG Chatbot</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fc; }
+    .container { max-width: 760px; margin: 40px auto; padding: 24px; background: #fff; border-radius: 12px; box-shadow: 0 12px 28px rgba(20, 40, 80, 0.08); }
+    h1 { margin-bottom: 16px; color: #213c67; }
+    textarea { width: 100%; min-height: 120px; padding: 14px; border: 1px solid #d6d9e6; border-radius: 10px; font-size: 1rem; resize: vertical; }
+    button { margin-top: 14px; padding: 12px 20px; border: none; border-radius: 10px; background: #3459f7; color: white; font-size: 1rem; cursor: pointer; }
+    button:hover { background: #2b4ad1; }
+    .response { margin-top: 24px; white-space: pre-wrap; background: #f6f8ff; border: 1px solid #dfe4f7; padding: 18px; border-radius: 10px; }
+    .hint { color: #5a6b8f; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>RAG Chatbot</h1>
+    <p>Ask about the user, habits, communication style, or conversation topics.</p>
+    <textarea id="query" placeholder="Example: What kind of person is this user?\nWhat are their habits?\nHow do they talk?"></textarea>
+    <button id="send">Send</button>
+    <div class="hint">Need a sample? Try: "What are their habits?" or "Show me relevant topics."</div>
+    <div id="response" class="response" style="display:none"></div>
+  </div>
+  <script>
+    document.getElementById('send').addEventListener('click', async () => {
+      const query = document.getElementById('query').value.trim();
+      const responseEl = document.getElementById('response');
+      if (!query) return;
+      responseEl.style.display = 'block';
+      responseEl.textContent = 'Loading...';
+
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        const data = await res.json();
+        responseEl.textContent = data.response || 'No response returned';
+      } catch (err) {
+        responseEl.textContent = 'Error: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
