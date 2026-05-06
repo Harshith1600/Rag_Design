@@ -20,11 +20,24 @@ def load_messages(path=None):
 
         for msg in convo:
             msg = msg.strip()
-            if msg:
-                messages.append({
-                    "id": msg_id,
-                    "text": msg
-                })
-                msg_id += 1
+            if not msg:
+                continue
+
+            speaker = "unknown"
+            text = msg
+            lowered = msg.lower()
+            if lowered.startswith("user 1:"):
+                speaker = "user1"
+                text = msg[len("user 1:"):].strip()
+            elif lowered.startswith("user 2:"):
+                speaker = "user2"
+                text = msg[len("user 2:"):].strip()
+
+            messages.append({
+                "id": msg_id,
+                "text": text,
+                "user": speaker
+            })
+            msg_id += 1
 
     return messages
