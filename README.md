@@ -202,6 +202,32 @@ Render will install dependencies, run the build pipeline to create `storage/` ar
 
 ---
 
+## Render persistent disk
+
+To keep the generated `storage/` artifacts across restarts, use a Render persistent disk.
+
+1. In your Render service settings, add a persistent disk and mount it at `storage/` inside the service.
+2. In `render.yaml`, the service includes an environment variable:
+
+```yaml
+      - key: STORAGE_DIR
+        value: storage
+```
+
+3. The app and pipeline now use `STORAGE_DIR` if it is set.
+4. This keeps files like:
+   - `storage/persona.json`
+   - `storage/faiss_index.bin`
+   - `storage/id_map.json`
+   - `storage/topic_summaries.json`
+   - `storage/checkpoints_100.json`
+   - `storage/checkpoints_100_index.bin`
+   - `storage/checkpoints_100_id_map.json`
+
+If the disk is mounted somewhere else, update `STORAGE_DIR` in Render environment variables to match the mount path.
+
+---
+
 ## Notes
 
 - If the query mentions `user1` or `user2`, the chatbot uses that user-specific persona data.

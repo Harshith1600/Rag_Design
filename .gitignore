@@ -1,0 +1,21 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+
+# Generated storage artifacts
+/storage/*
+!/storage/.gitkeep
+
+data/
+
+# Render or deployment files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

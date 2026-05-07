@@ -3,9 +3,7 @@ import json
 import faiss
 import numpy as np
 from src.embeddings import embed
-
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-STORAGE_DIR = os.path.join(BASE_DIR, "storage")
+from src.storage import STORAGE_DIR
 
 
 def load():

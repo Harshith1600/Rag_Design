@@ -1,9 +1,8 @@
 import os
 import json
 from collections import Counter
+from src.storage import STORAGE_DIR
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-STORAGE_DIR = os.path.join(BASE_DIR, "storage")
 MAX_FACTS = 8
 
 HABIT_PATTERNS = {

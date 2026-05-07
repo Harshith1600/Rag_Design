@@ -1,9 +1,7 @@
 import os
 from src.retriever import retrieve
+from src.storage import STORAGE_DIR
 import json
-
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-STORAGE_DIR = os.path.join(BASE_DIR, "storage")
 
 
 def load_persona():

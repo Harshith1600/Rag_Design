@@ -4,15 +4,12 @@ import sys
 if __name__ == "__main__" and __package__ is None:
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import os
 import json
 import faiss
 import numpy as np
 from src.embeddings import embed
 from src.summarizer import summarize, label_topic
-
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-STORAGE_DIR = os.path.join(BASE_DIR, "storage")
+from src.storage import STORAGE_DIR
 
 
 def build_all(topics):
