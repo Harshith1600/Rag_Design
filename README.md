@@ -171,37 +171,6 @@ python app.py
 
 ---
 
-## Deploying to Render
-
-Render can build and deploy this project automatically. These files are included for Render:
-
-- `render.yaml` — service definition
-- `requirements.txt` — Python dependencies
-- `app.py` — listens on `0.0.0.0:$PORT`
-
-Deployment steps:
-
-1. Commit and push the repo to GitHub.
-2. In Render, create a new Web Service and connect your GitHub repository.
-3. Set the Environment to `Python`.
-4. Use the following Build Command:
-
-```bash
-pip install -r requirements.txt && python src/build_pipeline.py
-```
-
-5. Use this Start Command:
-
-```bash
-gunicorn app:app --bind 0.0.0.0:$PORT
-```
-
-6. Deploy.
-
-Render will install dependencies, run the build pipeline to create `storage/` artifacts, and then start the Flask app.
-
----
-
 ## Render persistent disk
 
 To keep the generated `storage/` artifacts across restarts, use a Render persistent disk.
@@ -234,4 +203,3 @@ If the disk is mounted somewhere else, update `STORAGE_DIR` in Render environmen
 - If no specific user is mentioned, it falls back to the global persona summary.
 - Topic changes are detected from both semantic similarity and conversation structure, not only raw keywords.
 
-If you want, I can also add a short quick-start section with example queries and sample output.
